@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Consumo Eléctrico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Consumo Eléctrico</h1>
+        <table>
+            <tr>
+                <th>Nombre del Arrendado</th>
+                <th>Costo de Watts</th>
+                <th>Fecha de Inicio</th>
+                <th>Datos del Medidor al Inicio</th>
+                <th>Fecha Actual</th>
+                <th>Datos del Medidor Actual</th>
+                <th>Watts Consumidos</th>
+                <th>Días Transcurridos</th>
+                <th>Total a Pagar</th>
+            </tr>
+            <tr>
+                <td><input type="text" id="nombreArrendado" placeholder="Nombre del Arrendado"></td>
+                <td><input type="number" id="costoWatts" placeholder="Costo de Watts"></td>
+                <td><input type="date" id="fechaInicio"></td>
+                <td><input type="number" id="medidorInicio" step="0.01" placeholder="Datos del Medidor al Inicio"></td>
+                <td><input type="date" id="fechaActual"></td>
+                <td><input type="number" id="medidorActual" step="0.01" placeholder="Datos del Medidor Actual"></td>
+                <td><span id="wattsConsumidos"></span></td>
+                <td><span id="diasTranscurridos"></span></td>
+                <td><span id="totalPagar"></span></td>
+            </tr>
+        </table>
+        <button onclick="calcularConsumo()">Calcular</button>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

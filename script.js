@@ -1,7 +1,6 @@
 function calcularConsumo() {
     console.log("Función calcularConsumo ejecutada");
-    // Lógica de la función aquí
-}
+
     // Obtener los valores de los inputs
     const nombreArrendado = document.getElementById("nombreArrendado").value;
     const costoWatts = parseFloat(document.getElementById("costoWatts").value);

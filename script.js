@@ -1,9 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Aquí va tu código de la función calcularConsumo
     function calcularConsumo() {
-        console.log("Función calcularConsumo ejecutada");
-
-        // Obtener los valores de los inputs
         const nombreArrendado = document.getElementById("nombreArrendado").value;
         const costoWatts = parseFloat(document.getElementById("costoWatts").value);
         const fechaInicio = new Date(document.getElementById("fechaInicio").value);
@@ -11,22 +7,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const fechaActual = new Date(document.getElementById("fechaActual").value);
         const medidorActual = parseFloat(document.getElementById("medidorActual").value);
 
-        // Validar que todos los campos estén llenos y sean válidos
         if (!nombreArrendado || isNaN(costoWatts) || isNaN(medidorInicio) || isNaN(medidorActual) || isNaN(fechaInicio) || isNaN(fechaActual)) {
             alert("Por favor, completa todos los campos correctamente.");
             return;
         }
 
-        // Calcular los días transcurridos
         const diferenciaTiempo = fechaActual - fechaInicio;
-        const diasTranscurridos = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24)); // Convertir de milisegundos a días
-
+        const diasTranscurridos = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
         if (diasTranscurridos < 0) {
             alert("La fecha actual no puede ser anterior a la fecha de inicio.");
             return;
         }
 
-        // Calcular el consumo y el total a pagar
         const wattsConsumidos = medidorActual - medidorInicio;
         if (wattsConsumidos < 0) {
             alert("Los datos del medidor actual no pueden ser menores que los del inicio.");
@@ -35,13 +27,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const totalPagar = wattsConsumidos * costoWatts;
 
-        // Mostrar los resultados en la tabla
         document.getElementById("wattsConsumidos").textContent = wattsConsumidos.toFixed(2);
         document.getElementById("diasTranscurridos").textContent = diasTranscurridos;
         document.getElementById("totalPagar").textContent = `S/ ${totalPagar.toFixed(2)}`;
+
+        agregarRegistro(nombreArrendado, wattsConsumidos, diasTranscurridos, totalPagar);
     }
 
-    // Asegúrate de que el botón de calcular también llame a esta función
-    const calcularButton = document.querySelector('button');
-    calcularButton.addEventListener("click", calcularConsumo);
+    function agregarRegistro(nombre, watts, dias, total) {
+        const registrosTable = document.getElementById("registrosTable").querySelector("tbody");
+        const nuevaFila = document.createElement("tr");
+
+        nuevaFila.innerHTML = `
+            <td>${nombre}</td>
+            <td>${watts.toFixed(2)}</td>
+            <td>${dias}</td>
+            <td>S/ ${total.toFixed(2)}</td>
+            <td><button class="borrar-btn">Borrar</button></td>
+        `;
+
+        const borrarBtn = nuevaFila.querySelector(".borrar-btn");
+        borrarBtn.addEventListener("click", function() {
+            registrosTable.removeChild(nuevaFila);
+        });
+
+        registrosTable.appendChild(nuevaFila);
+    }
+
+    document.querySelector('button').addEventListener("click", calcularConsumo);
 });

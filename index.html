@@ -3,53 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Consumo Eléctrico</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Finol Ballon - Agencia de Festejos y Sublimados Carabobo</title>
+    <meta name="description" content="Fiestas mágicas, diseño de eventos, sublimados franelas y vasos personalizados. ¡Cotiza ya por WhatsApp!">
+    <style>
+        :root {
+            --rosa-principal: #eb9ac0;
+            --rosa-pastel: #f3aacb;
+            --rosa-claro: #f7bfd8;
+            --rosa-oscuro: #c8759c;
+            --blanco: #ffffff;
+            --sombra-3d: 0 10px 30px rgba(235, 154, 192, 0.4);
+            --gradient: linear-gradient(135deg, var(--rosa-principal), var(--rosa-pastel), #f7bfd8);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+        .logo-visual {
+            width: 350px;
+            height: 220px;
+            margin: 0 auto 1rem;
+            position: relative;
+            cursor: pointer;
+            perspective: 1000px;
+        }
+        .balloon {
+            position: absolute;
+            bottom: 0;
+            width: 55px;
+            height: 75px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: linear-gradient(var(--rosa-principal), var(--rosa-claro));
+            transform-style: preserve-3d;
+            animation: float3d 5s ease-in-out infinite reverse;
+            box-shadow: var(--sombra-3d);
+        }
+        .balloon::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2));
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            transform: translateZ(5px);
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 25px;
+            background: linear-gradient(to top, #333, transparent);
+            border-radius: 2px;
+        }
+        .balloon:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 25%; animation-delay: 0.8s; background: linear-gradient(var(--rosa-pastel), #f8d7e3); }
+        .balloon:nth-child(3) { left: 45%; animation-delay: 1.6s; }
+        .balloon:nth-child(4) { left: 65%; animation-delay: 2.4s; background: linear-gradient(var(--rosa-oscuro), #d89eb5); }
+        .balloon:nth-child(5) { left: 82%; animation-delay: 3.2s; }
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+            33% { transform: translateY(-25px) rotateX(10deg) rotateY(5deg); }
+            66% { transform: translateY(-15px) rotateX(-5deg) rotateY(-10deg); }
+        }
+        .gift-box {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%) rotateY(10deg);
+            width: 90px;
+            height: 65px;
+            background: linear-gradient(var(--blanco), #f9f9f9);
+            border-radius: 12px;
+            box-shadow: var(--sombra-3d), inset 0 2px 5px rgba(255,255,255,0.8);
+            transform-style: preserve-3d;
+        }
+        .gift-lazo {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(var(--rosa-oscuro), #b55f88);
+            border-radius: 50%;
+            box-shadow: var(--sombra-3d);
+        }
+        .gift-lazo::before, .gift-lazo::after {
+            content: '';
+            position: absolute;
+            width: 45px;
+            height: 22px;
+            background: linear-gradient(var(--rosa-oscuro), #b55f88);
+            top: 12px;
+            border-radius: 11px;
+        }
+        .gift-lazo::before { left: -28px; transform: skewY(-10deg); }
+        .gift-lazo::after { right: -28px; transform: skewY(10deg); }
+        .logo-text {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--sombra-3d);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px var(--rosa-principal)); }
+            to { filter: drop-shadow(0 0 20px var(--rosa-oscuro)); }
+        }
+        main { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .service-card {
+            background: rgba(255,255,255,0.95);
+            padding: 1.5rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: var(--sombra-3d);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            color: var(--rosa-oscuro);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+        .whatsapp-btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: var(--sombra-3d);
+            animation: pulse 2s infinite;
+            transition: all 0.3s;
+        }
+        .whatsapp-btn:hover { transform: scale(1.05); }
+        @keyframes pulse { 0%,100%{box-shadow:var(--sombra-3d);}50%{box-shadow:0 0 30px var(--rosa-principal);} }
+        .testimonials {
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 25px;
+            margin: 3rem 0;
+            box-shadow: var(--sombra-3d);
+        }
+        .testimonial {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--gradient);
+            border-radius: 15px;
+            color: white;
+        }
+        .testimonial::before {
+            content: '?????';
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+        .feedback-form {
+            background: rgba(255,255,255,0.95);
+            padding: 2rem;
+            border-radius: 25px;
+            margin: 3rem 0;
+            box-shadow: var(--sombra-3d);
+        }
+        .feedback-form h3 { color: var(--rosa-oscuro); text-align: center; margin-bottom: 1rem; }
+        .feedback-form textarea {
+            width: 100%;
+            height: 120px;
+            padding: 1rem;
+            border: 2px solid var(--rosa-pastel);
+            border-radius: 15px;
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 1rem;
+        }
+        .feedback-form button {
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: var(--sombra-3d);
+            transition: all 0.3s;
+        }
+        .feedback-form button:hover { transform: translateY(-2px); }
+        .floating-wa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(37,211,102,0.6);
+            z-index: 1000;
+            animation: bounce 2s infinite;
+            text-decoration: none;
+        }
+        footer { text-align: center; padding: 2rem; background: rgba(255,255,255,0.5); margin-top: 3rem; }
+        @media (max-width: 768px) {
+            .logo-visual { width: 280px; height: 180px; }
+            .balloon { width: 45px; height: 60px; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora de Consumo Eléctrico</h1>
-        <table>
-            <tr>
-                <th>Nombre del Arrendado</th>
-                <th>Costo de Watts</th>
-                <th>Fecha de Inicio</th>
-                <th>Datos del Medidor al Inicio</th>
-                <th>Fecha Actual</th>
-                <th>Datos del Medidor Actual</th>
-                <th>Watts Consumidos</th>
-                <th>Días Transcurridos</th>
-                <th>Total a Pagar</th>
-            </tr>
-            <tr>
-                <td><input type="text" id="nombreArrendado" placeholder="Nombre del Arrendado"></td>
-                <td><input type="number" id="costoWatts" placeholder="Costo de Watts"></td>
-                <td><input type="date" id="fechaInicio"></td>
-                <td><input type="number" id="medidorInicio" step="0.01" placeholder="Datos del Medidor al Inicio"></td>
-                <td><input type="date" id="fechaActual"></td>
-                <td><input type="number" id="medidorActual" step="0.01" placeholder="Datos del Medidor Actual"></td>
-                <td><span id="wattsConsumidos"></span></td>
-                <td><span id="diasTranscurridos"></span></td>
-                <td><span id="totalPagar"></span></td>
-            </tr>
-        </table>
-        <button onclick="calcularConsumo()">Calcular</button>
-        <h2>Registros</h2>
-        <table id="registrosTable">
-            <thead>
-                <tr>
-                    <th>Nombre del Arrendado</th>
-                    <th>Watts Consumidos</th>
-                    <th>Días Transcurridos</th>
-                    <th>Total a Pagar</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Registros dinámicos aquí -->
-            </tbody>
-        </table>
-    </div>
-<script src="script.js"></script>
+    <header>
+        <div class="logo-visual" onclick="openWhatsApp()">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="gift-box">
+                <div class="gift-lazo"></div>
+            </div>
+        </div>
+        <h1 class="logo-text">Finol Ballon</h1>
+        <p>¡Elevamos tus fiestas con magia y personalización! ????</p>
+    </header>
+    <main>
+        <section class="services">
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fiesta infantil con globos" loading="lazy">
+                <h3>?? Agencia de Festejos</h3>
+                <p>Diseño integral de fiestas: decoraciones, temáticas y eventos inolvidables para niños y adultos.</p>
+                <a href="https://wa.me/584244525765?text=¡Hola! Cotizo agencia de festejos para mi evento ??" class="whatsapp-btn" target="_blank">Cotizar Ya</a>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1578479102343-e9b0d5e539ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Franelas sublimadas personalizadas" loading="lazy">
+                <h3>?? Sublimados Franelas</h3>
+                <p>Camisetas únicas con tus diseños. Alta calidad para eventos, empresas o regalos especiales.</p>
+                <a href="https://wa.me/584244525765?text=¡Hola! Quiero sublimados de franelas ?? Precios?" class="whatsapp-btn" target="_blank">Cotizar Ya</a>
+            </div>
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1628258334167-d7de778ebac2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Vasos sublimados fiesta" loading="lazy">
+                <h3>?? Sublimados Vasos</h3>
+                <p>Vasos personalizados duraderos. Ideales para fiestas, souvenirs o uso diario con tu estilo.</p>
+                <a href="https://wa.me/584244525765?text=¡Hola! Sublimados de vasos ?? Opciones disponibles?" class="whatsapp-btn" target="_blank">Cotizar Ya</a>
+            </div>
+        </section>
+        <section class="testimonials">
+            <h2 style="text-align:center;color:var(--rosa-oscuro);margin-bottom:2rem;">?? Opiniones de Nuestros Clientes</h2>
+            <div class="testimonial">¡La fiesta de mi hijo fue mágica! Globos perfectos y todo impecable. Recomiendo 100% ????? - María G.</div>
+            <div class="testimonial">Franelas sublimadas de calidad premium. Entrega rápida y diseños increíbles. ¡Vuelvo pronto! - Carlos R.</div>
+            <div class="testimonial">Vasos personalizados para mi boda, quedaron hermosos y duraderos. Servicio excelente. - Ana L.</div>
+            <div class="testimonial">Agencia top en Carabobo. Decoración soñada y precios justos. ¡Gracias Finol Ballon! - Pedro M.</div>
+        </section>
+        <section class="feedback-form">
+            <h3>?? Deja Tu Opinión</h3>
+            <form id="feedbackForm">
+                <textarea placeholder="¿Qué te pareció nuestro servicio? ¡Comparte tu experiencia! ??" required></textarea>
+                <button type="submit">Enviar Opinión</button>
+            </form>
+        </section>
+    </main>
+    <a href="https://wa.me/584244525765?text=¡Hola Finol Ballon! Vi tu web ?? Quiero cotizar" class="floating-wa" target="_blank" title="WhatsApp">??</a>
+    <footer>
+        <p>&copy; 2026 Finol Ballon | Naguanagua, Carabobo, VE | ¡Tus fiestas elevadas!</p>
+    </footer>
+    <script>
+        function openWhatsApp() {
+            window.open('https://wa.me/584244525765?text=¡Hola! Amor tu logo 3D de globos ?? Cotizo fiesta', '_blank');
+        }
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const opinion = document.querySelector('textarea').value;
+            alert('¡Gracias por tu opinión! La revisaremos y contactamos por WhatsApp. ??');
+            // En producción: enviar a tu email o WhatsApp API
+            openWhatsAppMsg(`Nueva opinión: ${opinion}`);
+            this.reset();
+        });
+        function openWhatsAppMsg(msg) {
+            window.open(`https://wa.me/584244525765?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+        // Scroll animations
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.service-card, .testimonial').forEach((el, i) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0) rotateX(0deg)';
+                }
+            });
+        });
+        document.querySelectorAll('.service-card, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease';
+        });
+    </script>
 </body>
 </html>
